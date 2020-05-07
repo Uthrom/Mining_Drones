@@ -54,41 +54,44 @@ local make_depot_recipe = function(entity, item_prototype, fluid_ingredient)
     return
   end
   
-  local recipe =
-  {
-    type = "recipe",
-    name = recipe_name,
-    localised_name = localised_name,
-    icon = item_prototype.dark_background_icon or item_prototype.icon,
-    icon_size = item_prototype.icon_size,
-    icons = item_prototype.icons,
-    ingredients =
+  for drone_k,drone_name in pairs(shared.drone_names) do
+
+    local recipe =
     {
-      {type = "item", name = names.drone_name, amount = 1},
-      fluid_ingredient
-    },
-    results =
-    {
-      {type = "item", name = item_prototype.name, amount = math.min(item_prototype.stack_size * 100, (2 ^ 16) - 1), show_details_in_recipe_tooltip = false},
-      {type = "item", name = item_prototype.name, amount = (2 ^ 16) -1, show_details_in_recipe_tooltip = false} --overflow stack...
-    },
-    category = names.mining_depot,
-    subgroup = (fluid_ingredient and "smelting-machine") or "extraction-machine",
-    overload_multiplier = 100,
-    hide_from_player_crafting = true,
-    main_product = "",
-    allow_decomposition = false,
-    allow_as_intermediate = false,
-    allow_intermediates = true,
-    order = entity.name
-  }
-  data:extend{recipe}
-  local map_color = (entity.type == "tree" and {r = 0.19, g = 0.39, b = 0.19, a = 0.40}) or entity.map_color or { r = 0.869, g = 0.5, b = 0.130, a = 0.5 }
-  for k = 1, shared.variation_count do
-    --log("Making drone "..r..g..b)
-    make_drone(recipe_name..shared.drone_name..k, map_color, item_prototype.localised_name or {"item-name."..item_prototype.name})
+      type = "recipe",
+      name = recipe_name,
+      localised_name = localised_name,
+      icon = item_prototype.dark_background_icon or item_prototype.icon,
+      icon_size = item_prototype.icon_size,
+      icons = item_prototype.icons,
+      ingredients =
+      {
+        {type = "item", name = drone_name, amount = 1},
+        fluid_ingredient
+      },
+      results =
+      {
+        {type = "item", name = item_prototype.name, amount = math.min(item_prototype.stack_size * 100, (2 ^ 16) - 1), show_details_in_recipe_tooltip = false},
+        {type = "item", name = item_prototype.name, amount = (2 ^ 16) -1, show_details_in_recipe_tooltip = false} --overflow stack...
+      },
+      category = names.mining_depot,
+      subgroup = (fluid_ingredient and "smelting-machine") or "extraction-machine",
+      overload_multiplier = 100,
+      hide_from_player_crafting = true,
+      main_product = "",
+      allow_decomposition = false,
+      allow_as_intermediate = false,
+      allow_intermediates = true,
+      order = entity.name
+    }
+    data:extend{recipe}
+    local map_color = (entity.type == "tree" and {r = 0.19, g = 0.39, b = 0.19, a = 0.40}) or entity.map_color or { r = 0.869, g = 0.5, b = 0.130, a = 0.5 }
+    for k = 1, shared.variation_count do
+      log("Making attack proxy drone "..recipe_name.."-"..drone_name.."-"..k)
+      make_drone(recipe_name.."-"..drone_name.."-"..k, map_color, item_prototype.localised_name or {"item-name."..item_prototype.name}, shared.drone_hps[drone_k])
+    end
   end
-end
+end 
 
 local is_stupid = function(entity)
   --Thanks NPE and dectorio!

@@ -1,6 +1,5 @@
 local mining_technologies = require("script/mining_technologies")
 local pollution_per_ore = 0.2
-local default_bot_name = shared.drone_name
 
 local script_data =
 {
@@ -135,8 +134,6 @@ end
 
 mining_drone.new = function(entity, depot)
 
-  --if entity.name ~= shared.drone_name then error("what are you playing at") end
-
   local drone =
   {
     entity = entity,
@@ -262,7 +259,8 @@ function mining_drone:process_mining()
       local count = product_amount(product) * self.mining_count
       if count > 0 then
         pollute(target.position, pollution_per_ore * count)
-        pollution_flow(default_bot_name, pollution_per_ore * count)
+--        pollution_flow(shared.drone_names[shared.drone_level], pollution_per_ore * count)
+        pollution_flow(self.entity.name, pollution_per_ore * count)
 
         local count = count + bonus_amount
 
@@ -580,10 +578,12 @@ local on_entity_removed = function(event)
   if not drone then return end
 
   if event.force and event.force.valid then
-    event.force.kill_count_statistics.on_flow(default_bot_name, 1)
+--    event.force.kill_count_statistics.on_flow(shared.drone_names[shared.drone_level], 1)
+    event.force.kill_count_statistics.on_flow(entity.name, 1)
   end
 
-  entity.force.kill_count_statistics.on_flow(default_bot_name, -1)
+--  entity.force.kill_count_statistics.on_flow(shared.drone_names[shared.drone_level], -1)
+  entity.force.kill_count_statistics.on_flow(entity.name, -1)
 
   drone:handle_drone_deletion()
 

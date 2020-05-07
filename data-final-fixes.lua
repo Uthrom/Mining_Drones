@@ -6,10 +6,12 @@ require("data/entities/attack_proxy/attack_proxy")
 
 
 for name, unit in pairs(data.raw.unit) do
-  if name:find(shared.drone_name, 0, true) then
-    unit.loot = nil
-  end
-  if name:find(shared.attack_proxy_name, 0, true) then
-    unit.loot = nil
+  for k,v in pairs(shared.drone_names) do
+    if name:find(v, 0, true) then
+      unit.loot = nil
+    end
+    if name:find(shared.attack_proxy_name, 0, true) then
+      unit.loot = nil
+    end
   end
 end

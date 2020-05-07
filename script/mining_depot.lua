@@ -9,7 +9,6 @@ local depot_metatable = {__index = mining_depot}
 local depot_range = 40
 local max_spawn_per_update = 5
 local variation_count = shared.variation_count
-local default_bot_name = names.drone_name
 
 local script_data =
 {
@@ -192,7 +191,12 @@ function mining_depot:spawn_drone()
   local recipe = entity.get_recipe()
   if not recipe then return end
 
-  local name = recipe.name..names.drone_name..random(variation_count)
+  
+  -- serpent.block(self:get_drone_inventory().get_contents())
+  local in_inv_k
+  for k, _ in pairs(self:get_drone_inventory().get_contents()) do in_inv_k = k end 
+--  local name = recipe.name.."-"..names.drone_names[names.drone_level].."-"..random(variation_count)
+  local name = recipe.name.."-"..in_inv_k.."-"..random(variation_count)
 
   local spawn_entity_data =
   {
@@ -210,7 +214,7 @@ function mining_depot:spawn_drone()
   unit.orientation = (entity.direction / 8)
   --unit.ai_settings.do_separation = false
 
-  --self:get_drone_inventory().remove({name = names.drone_name, count = 1})
+  
 
 
   local drone = mining_drone.new(unit, self)
@@ -429,11 +433,17 @@ function mining_depot:get_input_fluidbox()
 end
 
 function mining_depot:get_drone_item_count()
-  return self.entity.get_item_count(shared.drone_name)
+  local ent = 0
+  for k, ent_name in pairs(shared.drone_names) do
+     ent = ent + self.entity.get_item_count(ent_name)
+  end 
+
+  return ent
+--  return self.entity.get_item_count(shared.drone_names[drone_level])
 end
 
 function mining_depot:is_spawn_blocked()
-  return not self.entity.surface.can_place_entity{name = default_bot_name, position = self:get_spawn_position()}
+  return not self.entity.surface.can_place_entity{name = names.drone_names[0], position = self:get_spawn_position()}
 end
 
 local unique_index = function(entity)
@@ -604,7 +614,15 @@ end
 function mining_depot:remove_drone(drone, remove_item)
 
   if remove_item then
-    self:get_drone_inventory().remove{name = names.drone_name, count = 1}
+--    self:get_drone_inventory().remove{name = names.drone_names[names.drone_level], count = 1}
+    local in_inv_k
+    local in_recip = self.entity.get_recipe()
+    if in_recip.ingredients ~= nil then
+--    for k, _ in pairs(self:get_drone_inventory().get_contents()) do in_inv_k = k end 
+--    for k, _ in pairs(in_recip.ingredients()) do in_inv_k = k end 
+      in_inv_k = in_recip['ingredients'][1]['name']
+    end
+    self:get_drone_inventory().remove{name = in_inv_k, count = 1}
   end
 
   local mining_target = drone.mining_target
@@ -854,7 +872,7 @@ end
 local box, mask
 local get_box_and_mask = function()
   if not (box and mask) then
-    local prototype = game.entity_prototypes[default_bot_name]
+    local prototype = game.entity_prototypes[names.drone_names[0]]
     box = prototype.collision_box
     mask = prototype.collision_mask
   end

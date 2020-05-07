@@ -21,7 +21,7 @@ end
 
 local sound_enabled = not settings.startup.mute_drones.value
 
-local make_drone = function(name, tint, item)
+local make_drone = function(name, tint, item, health)
   --log(serpent.block{name = name, tint = tint})
   local base = util.copy(data.raw.character.character)
   --for k, layer in pairs (base.animations[1].idle_with_gun.layers) do
@@ -50,7 +50,7 @@ local make_drone = function(name, tint, item)
   util.recursive_hack_animation_speed(base.animations[1].mining_with_tool, 1 / random_mining_speed)
 
   local bot_name = name
-  local attack_range = 16
+-- NOT USED  local attack_range = 16
   local bot =
   {
     type = "unit",
@@ -62,7 +62,7 @@ local make_drone = function(name, tint, item)
     flags = mining_drone_flags,
     map_color = {r ^ 0.5, g ^ 0.5, b ^ 0.5, 0.5},
     enemy_map_color = {r = 1},
-    max_health = 150,
+    max_health = health,
     radar_range = 1,
     order="zzz-"..bot_name,
     --subgroup = "iron-units",
