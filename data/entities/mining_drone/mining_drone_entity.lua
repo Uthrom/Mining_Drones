@@ -21,7 +21,7 @@ end
 
 local sound_enabled = not settings.startup.mute_drones.value
 
-local make_drone = function(name, tint, item, health)
+local make_drone = function(name, tint, item, health, resistance)
   --log(serpent.block{name = name, tint = tint})
   local base = util.copy(data.raw.character.character)
   --for k, layer in pairs (base.animations[1].idle_with_gun.layers) do
@@ -71,7 +71,7 @@ local make_drone = function(name, tint, item, health)
     collision_box = {{-0.18, -0.18}, {0.18, 0.18}},
     collision_mask = mining_drone_collision_mask,
     max_pursue_distance = 64,
-    resistances = nil,
+    resistances = resistance,
     min_persue_time = 60 * 15,
     selection_box = {{-0.3, -1}, {0.3, 0.2}},
     sticker_box = {{-0.3, -1}, {0.2, 0.3}},

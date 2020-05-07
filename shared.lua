@@ -6,6 +6,56 @@ data.drone_level = 0
 data.drone_names = { [0] = "mining-drone-mk1", [1] = "mining-drone-mk2", [2] = "mining-drone-mk3" }
 data.drone_hps = { [0] = 100, [1] = 200, [2] = 400 }
 data.drone_attack_range = { [0] = 0.5, [1] = 0.1, [2] = 2 }
+data.drone_resistances = {
+    [0] = {
+        nil,
+    },
+    [1] = {
+        {
+            type = "physical",
+            decrease = 3,
+            percent = 20
+        },
+        {
+            type = "acid",
+            decrease = 0,
+            percent = 20
+        },
+        {
+            type = "explosion",
+            decrease = 2,
+            percent = 20
+        },
+        {
+            type = "fire",
+            decrease = 0,
+            percent = 10
+        }
+    }, 
+    [2] = {
+        {
+            type = "physical",
+            decrease = 6,
+            percent = 30
+        },
+        {
+            type = "explosion",
+            decrease = 20,
+            percent = 30
+        },
+        {
+            type = "acid",
+            decrease = 0,
+            percent = 40
+        },
+        {
+            type = "fire",
+            decrease = 0,
+            percent = 30
+        }
+    }
+}
+
 data.drone_ingredients = {
     [0] = {
         {"iron-plate", 10},
@@ -14,13 +64,11 @@ data.drone_ingredients = {
     },
     [1] = {
         {"mining-drone-mk1", 1},
-        {"light-armor", 1},
-        {"pistol", 1}
+        {"light-armor", 1}
     },
     [2] = {
         {"mining-drone-mk2", 1},
-        {"heavy-armor", 1},
-        {"submachine-gun", 1}
+        {"heavy-armor", 1}
     }
 }
 
