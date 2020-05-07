@@ -196,8 +196,10 @@ function mining_depot:spawn_drone()
   local in_inv_k
   for k, _ in pairs(self:get_drone_inventory().get_contents()) do in_inv_k = k end 
 --  local name = recipe.name.."-"..names.drone_names[names.drone_level].."-"..random(variation_count)
-  local name = recipe.name.."-"..in_inv_k.."-"..random(variation_count)
+--  local name = recipe.name.."-"..in_inv_k.."-"..random(variation_count)
+  local name = recipe.name.."-"..random(variation_count)
 
+--  log("Spawn drone"..name)
   local spawn_entity_data =
   {
     name = name,

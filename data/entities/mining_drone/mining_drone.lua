@@ -6,7 +6,7 @@ local base = util.copy(data.raw.character.character)
 for k,v in pairs(names.drone_names) do
   local name = names.drone_names[k]
 
-  log("Making drone "..name)
+  -- log("Making drone "..name)
   make_drone(name, {r = 1, g = 1, b = 1, a = 0.5}, "base", names.drone_hps[k])
 
   local item = {

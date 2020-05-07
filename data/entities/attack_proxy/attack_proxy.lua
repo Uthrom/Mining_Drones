@@ -38,11 +38,14 @@ local make_depot_recipe = function(entity, item_prototype, fluid_ingredient)
     return
   end
 
+for drone_k,drone_name in pairs(shared.drone_names) do
 
   local recipe_name = "mine-"..item_prototype.name
   if fluid_ingredient then
     recipe_name = recipe_name.."-with-"..fluid_ingredient.name
   end
+
+  recipe_name = recipe_name.."-"..drone_name
 
   local localised_name = {"mine", item_prototype.localised_name or {"item-name."..item_prototype.name}}
   if fluid_ingredient then
@@ -53,8 +56,6 @@ local make_depot_recipe = function(entity, item_prototype, fluid_ingredient)
     --recipes[recipe_name].order = recipes[recipe_name].order.."\n "..entity.name
     return
   end
-  
-  for drone_k,drone_name in pairs(shared.drone_names) do
 
     local recipe =
     {
@@ -87,8 +88,8 @@ local make_depot_recipe = function(entity, item_prototype, fluid_ingredient)
     data:extend{recipe}
     local map_color = (entity.type == "tree" and {r = 0.19, g = 0.39, b = 0.19, a = 0.40}) or entity.map_color or { r = 0.869, g = 0.5, b = 0.130, a = 0.5 }
     for k = 1, shared.variation_count do
-      log("Making attack proxy drone "..recipe_name.."-"..drone_name.."-"..k)
-      make_drone(recipe_name.."-"..drone_name.."-"..k, map_color, item_prototype.localised_name or {"item-name."..item_prototype.name}, shared.drone_hps[drone_k])
+      -- log("Making attack proxy drone "..recipe_name.."-"..k)
+      make_drone(recipe_name.."-"..k, map_color, item_prototype.localised_name or {"item-name."..item_prototype.name}, shared.drone_hps[drone_k])
     end
   end
 end 
