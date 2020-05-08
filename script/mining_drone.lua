@@ -259,7 +259,6 @@ function mining_drone:process_mining()
       local count = product_amount(product) * self.mining_count
       if count > 0 then
         pollute(target.position, pollution_per_ore * count)
---        pollution_flow(shared.drone_names[shared.drone_level], pollution_per_ore * count)
         pollution_flow(self.entity.name, pollution_per_ore * count)
 
         local count = count + bonus_amount
@@ -578,11 +577,9 @@ local on_entity_removed = function(event)
   if not drone then return end
 
   if event.force and event.force.valid then
---    event.force.kill_count_statistics.on_flow(shared.drone_names[shared.drone_level], 1)
     event.force.kill_count_statistics.on_flow(entity.name, 1)
   end
 
---  entity.force.kill_count_statistics.on_flow(shared.drone_names[shared.drone_level], -1)
   entity.force.kill_count_statistics.on_flow(entity.name, -1)
 
   drone:handle_drone_deletion()

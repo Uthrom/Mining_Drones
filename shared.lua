@@ -2,73 +2,138 @@
 
 local data = {}
 
-data.drone_level = 0
-data.drone_names = { [0] = "mining-drone-mk1", [1] = "mining-drone-mk2", [2] = "mining-drone-mk3" }
-data.drone_hps = { [0] = 100, [1] = 200, [2] = 400 }
-data.drone_attack_range = { [0] = 0.5, [1] = 0.1, [2] = 2 }
-data.drone_resistances = {
+data.drone_metadata = {
     [0] = {
-        nil,
+        name = "mining-drone-mk1",
+        health = 100,
+        attack_range = 0.5,
+        resistance = {
+            nil
+        },
+        ingredients = {
+            {"iron-plate", 10},
+            {"iron-gear-wheel", 5},
+            {"iron-stick", 10}
+        },
+        icon_layers = {
+            nil
+        },
+        ore_icon_layers = {
+            {
+                icon = "__base__/graphics/icons/character.png",
+                icon_size = 64,
+                shift={8,0},
+                scale=0.50
+            }
+        }
     },
-    [1] = {
-        {
-            type = "physical",
-            decrease = 3,
-            percent = 20
-        },
-        {
-            type = "acid",
-            decrease = 0,
-            percent = 20
-        },
-        {
-            type = "explosion",
-            decrease = 2,
-            percent = 20
-        },
-        {
-            type = "fire",
-            decrease = 0,
-            percent = 10
-        }
-    }, 
-    [2] = {
-        {
-            type = "physical",
-            decrease = 6,
-            percent = 30
-        },
-        {
-            type = "explosion",
-            decrease = 20,
-            percent = 30
-        },
-        {
-            type = "acid",
-            decrease = 0,
-            percent = 40
-        },
-        {
-            type = "fire",
-            decrease = 0,
-            percent = 30
-        }
-    }
-}
 
-data.drone_ingredients = {
-    [0] = {
-        {"iron-plate", 10},
-        {"iron-gear-wheel", 5},
-        {"iron-stick", 10}
-    },
     [1] = {
-        {"mining-drone-mk1", 1},
-        {"light-armor", 1}
+        name = "mining-drone-mk2",
+        health = 200,
+        attack_range = 1,
+        resistance = {
+            {
+                type = "physical",
+                decrease = 3,
+                percent = 20
+            },
+            {
+                type = "acid",
+                decrease = 0,
+                percent = 20
+            },
+            {
+                type = "explosion",
+                decrease = 2,
+                percent = 20
+            },
+            {
+                type = "fire",
+                decrease = 0,
+                percent = 10
+            }
+        }, 
+        ingredients = {
+            {"mining-drone-mk1", 1},
+            {"light-armor", 1}
+        },
+        icon_layers = {
+            {
+                icon = "__base__/graphics/icons/light-armor.png",
+                icon_size=64,
+                shift={8,8},
+                scale=0.25
+            }
+        },
+        ore_icon_layers = {
+--            {
+--                icon = "__base__/graphics/icons/character.png",
+--                icon_size = 64,
+--                shift={8,0},
+--                scale=0.375
+--            },
+            {
+                icon = "__base__/graphics/icons/light-armor.png",
+                icon_size = 64,
+                shift={8,0},
+                scale=0.375
+            }
+        }
     },
+
     [2] = {
-        {"mining-drone-mk2", 1},
-        {"heavy-armor", 1}
+        name = "mining-drone-mk3",
+        health = 400,
+        attack_range = 2,
+        resistance = {
+            {
+                type = "physical",
+                decrease = 6,
+                percent = 30
+            },
+            {
+                type = "explosion",
+                decrease = 20,
+                percent = 30
+            },
+            {
+                type = "acid",
+                decrease = 0,
+                percent = 40
+            },
+            {
+                type = "fire",
+                decrease = 0,
+                percent = 30
+            }
+        },
+        ingredients = {
+            {"mining-drone-mk2", 1},
+            {"heavy-armor", 1}
+        },
+        icon_layers = {
+            { 
+                icon = "__base__/graphics/icons/heavy-armor.png",
+                icon_size=64,
+                shift={8,8},
+                scale=0.25
+            }
+        },
+        ore_icon_layers = {
+--            {
+--                icon = "__base__/graphics/icons/character.png",
+--                icon_size = 64,
+--                shift={8,0},
+--                scale=0.375
+--            },
+            {
+                icon = "__base__/graphics/icons/heavy-armor.png",
+                icon_size = 64,
+                shift={8,0},
+                scale=0.375
+            }
+        }
     }
 }
 

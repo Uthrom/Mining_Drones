@@ -38,18 +38,18 @@ local make_depot_recipe = function(entity, item_prototype, fluid_ingredient)
     return
   end
 
-for drone_k,drone_name in pairs(shared.drone_names) do
+for drone_k, _ in pairs(shared.drone_metadata) do
 
   local recipe_name = "mine-"..item_prototype.name
   if fluid_ingredient then
     recipe_name = recipe_name.."-with-"..fluid_ingredient.name
   end
 
-  recipe_name = recipe_name.."-"..drone_name
+  recipe_name = recipe_name.."-"..shared.drone_metadata[drone_k].name
 
-  local localised_name = {"mine", item_prototype.localised_name or {"item-name."..item_prototype.name}}
+  local localised_name = {"mine", item_prototype.localised_name or {"item-name."..item_prototype.name},  shared.drone_metadata[drone_k].name}
   if fluid_ingredient then
-    localised_name = {"mine-with-fluid", item_prototype.localised_name or {"item-name."..item_prototype.name}, data.raw.fluid[fluid_ingredient.name].localised_name or {"fluid-name."..fluid_ingredient.name}}
+    localised_name = {"mine-with-fluid", item_prototype.localised_name or {"item-name."..item_prototype.name}, data.raw.fluid[fluid_ingredient.name].localised_name or {"fluid-name."..fluid_ingredient.name}, shared.drone_metadata[drone_k].name}
   end
 
   if recipes[recipe_name] then
@@ -64,10 +64,15 @@ for drone_k,drone_name in pairs(shared.drone_names) do
       localised_name = localised_name,
       icon = item_prototype.dark_background_icon or item_prototype.icon,
       icon_size = item_prototype.icon_size,
-      icons = item_prototype.icons,
+      icons = { 
+        {
+          icon = item_prototype.dark_background_icon or item_prototype.icon,
+          icon_size = item_prototype.icon_size
+        }
+      },
       ingredients =
       {
-        {type = "item", name = drone_name, amount = 1},
+        {type = "item", name = shared.drone_metadata[drone_k].name, amount = 1},
         fluid_ingredient
       },
       results =
@@ -85,11 +90,18 @@ for drone_k,drone_name in pairs(shared.drone_names) do
       allow_intermediates = true,
       order = entity.name
     }
+
+    for _, v in pairs(names.drone_metadata[drone_k].ore_icon_layers) do
+      -- log("Layer: "..serpent.block(v))
+      recipe.icons[#recipe.icons + 1] = v 
+    end
+
     data:extend{recipe}
+
     local map_color = (entity.type == "tree" and {r = 0.19, g = 0.39, b = 0.19, a = 0.40}) or entity.map_color or { r = 0.869, g = 0.5, b = 0.130, a = 0.5 }
     for k = 1, shared.variation_count do
       -- log("Making attack proxy drone "..recipe_name.."-"..k)
-      make_drone(recipe_name.."-"..k, map_color, item_prototype.localised_name or {"item-name."..item_prototype.name}, shared.drone_hps[drone_k], shared.drone_resistances[drone_k])
+      make_drone(recipe_name.."-"..k, map_color, item_prototype.localised_name or {"item-name."..item_prototype.name}, shared.drone_metadata[drone_k].health, shared.drone_metadata[drone_k].resistance)
     end
   end
 end 
