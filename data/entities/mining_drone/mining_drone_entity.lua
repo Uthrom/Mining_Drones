@@ -21,7 +21,7 @@ end
 
 local sound_enabled = not settings.startup.mute_drones.value
 
-local make_drone = function(name, tint, item, health, resistance)
+local make_drone = function(name, tint, item, health, resistance, attack_range)
   --log(serpent.block{name = name, tint = tint})
   local base = util.copy(data.raw.character.character)
   --for k, layer in pairs (base.animations[1].idle_with_gun.layers) do
@@ -89,7 +89,7 @@ local make_drone = function(name, tint, item, health, resistance)
       ammo_category = "bullet",
       warmup = math.floor(19 * random_mining_speed),
       cooldown = math.floor((26 - 19) * random_mining_speed),
-      range = 0.5,
+      range = attack_range,
       ammo_type =
       {
         category = util.ammo_category("mining-drone"),

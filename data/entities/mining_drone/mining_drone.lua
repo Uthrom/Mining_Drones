@@ -7,7 +7,7 @@ for k, _ in pairs(names.drone_metadata) do
   local name = names.drone_metadata[k].name
 
   -- log("Making drone "..name)
-  make_drone(name, {r = 1, g = 1, b = 1, a = 0.5}, "base", names.drone_metadata[k].health, names.drone_metadata[k].resistance)
+  make_drone(name, {r = 1, g = 1, b = 1, a = 0.5}, "base", names.drone_metadata[k].health, names.drone_metadata[k].resistance, names.drone_metadata[k].attack_range)
 
   local item = {
     type = "item",

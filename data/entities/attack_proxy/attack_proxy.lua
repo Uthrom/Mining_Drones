@@ -101,7 +101,7 @@ for drone_k, _ in pairs(shared.drone_metadata) do
     local map_color = (entity.type == "tree" and {r = 0.19, g = 0.39, b = 0.19, a = 0.40}) or entity.map_color or { r = 0.869, g = 0.5, b = 0.130, a = 0.5 }
     for k = 1, shared.variation_count do
       -- log("Making attack proxy drone "..recipe_name.."-"..k)
-      make_drone(recipe_name.."-"..k, map_color, item_prototype.localised_name or {"item-name."..item_prototype.name}, shared.drone_metadata[drone_k].health, shared.drone_metadata[drone_k].resistance)
+      make_drone(recipe_name.."-"..k, map_color, item_prototype.localised_name or {"item-name."..item_prototype.name}, shared.drone_metadata[drone_k].health, shared.drone_metadata[drone_k].resistance, shared.drone_metadata[drone_k].attack_range)
     end
   end
 end 
