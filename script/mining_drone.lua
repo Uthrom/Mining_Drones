@@ -568,10 +568,27 @@ end
 
 local on_entity_removed = function(event)
   local entity = event.entity
+  local name = entity.name
+
   if not (entity and entity.valid) then return end
 
   local unit_number = entity.unit_number
   if not unit_number then return end
+
+  for k, v in pairs(shared.drone_metadata) do
+    if name:find(shared.drone_metadata[k].name, 0, true) and not name:find(shared.attack_proxy_name, 0, true) and name ~= "mining-drone-proxy-chest" and not string.match(name, "%-corpse") then
+      if event.cause and event.cause.force and event.cause.force and event.cause.force.name == "enemy" then
+        -- log("do nothing entity died to enemy force")
+      elseif event.cause and event.cause.force and event.cause.force and event.cause.force.name == "player" then
+        -- log("do nothing entity died to player force")
+      else
+        -- log("remove our armor from loot drop")
+        if #event.loot > 0 then
+            event.loot.remove({name = shared.drone_metadata[k].armor})
+        end
+      end
+    end
+  end
 
   local drone = get_drone(unit_number)
   if not drone then return end

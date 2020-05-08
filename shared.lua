@@ -58,6 +58,7 @@ data.drone_metadata = {
             {"mining-drone-mk1", 1},
             {"light-armor", 1}
         },
+        armor = "light-armor",
         icon_layers = {
             {
                 icon = "__base__/graphics/icons/light-armor.png",
@@ -112,6 +113,7 @@ data.drone_metadata = {
             {"mining-drone-mk2", 1},
             {"heavy-armor", 1}
         },
+        armor = "heavy-armor",
         icon_layers = {
             { 
                 icon = "__base__/graphics/icons/heavy-armor.png",
