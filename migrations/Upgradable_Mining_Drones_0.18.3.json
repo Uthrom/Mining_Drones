@@ -3,6 +3,10 @@
     [
       "mining-drone",
       "mining-drone-mk1"
+    ],
+    [
+      "request-mining-drone",
+      "request-mining-drone-mk1"
     ]
   ],
   "item": [
