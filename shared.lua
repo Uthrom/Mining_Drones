@@ -56,7 +56,7 @@ data.drone_metadata = {
         }, 
         ingredients = {
             {"mining-drone-mk1", 1},
-            {"light-armor", 1}
+            {"light-armor", 1}          -- Same as "armor" below
         },
         armor = "light-armor",
         icon_layers = {
@@ -111,7 +111,7 @@ data.drone_metadata = {
         },
         ingredients = {
             {"mining-drone-mk2", 1},
-            {"heavy-armor", 1}
+            {"heavy-armor", 1}          -- Same as "armor" below
         },
         armor = "heavy-armor",
         icon_layers = {
