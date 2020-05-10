@@ -11,19 +11,9 @@ local function MigrateAssemblers()
                 end
             end
         end
-    
 
         for _, entity in ipairs(surface.find_entities_filtered{name="mining-depot"}) do
-            recipe = entity.get_recipe()
-            if recipe ~= nil then 
-                log("Depot: "..entity.name.." Recipe: "..recipe.name)
-            else 
-                log("Depot recipe NIL")
-            end
-
-
---[[
-            local output_ore 
+           local output_ore 
             local fluid 
             local recipe_name
 
@@ -50,18 +40,3 @@ local function MigrateAssemblers()
 end 
 
 MigrateAssemblers()
-
---[[
-local function MigrateRecipes()
-
-    for i, recipe in pairs(data.raw['recipe']) do
-        log("Recipe: "..recipe.name)
-        if string.match(recipe.name, "mine-%mining-drone") then
-            string.gsub(recipe.name, "mining-drone", "-mining-drone-mk1")
-            log("Changed to: "..recipe.name)
-        end
-    end
-end
-
-MigrateRecipes()
-]]
