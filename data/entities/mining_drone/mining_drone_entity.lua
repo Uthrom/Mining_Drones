@@ -72,6 +72,7 @@ local make_drone = function(name, tint, item, health, resistance, attack_range)
     collision_mask = mining_drone_collision_mask,
     max_pursue_distance = 64,
     resistances = resistance,
+    hide_resistances = false,
     min_persue_time = 60 * 15,
     selection_box = {{-0.3, -1}, {0.3, 0.2}},
     sticker_box = {{-0.3, -1}, {0.2, 0.3}},
