@@ -13,7 +13,8 @@ local function MigrateAssemblers()
         end
 
         for _, entity in ipairs(surface.find_entities_filtered{name="mining-depot"}) do
-           local output_ore 
+            -- log("Mining depot: "..entity.name)
+            local output_ore 
             local fluid 
             local recipe_name
 
@@ -32,7 +33,6 @@ local function MigrateAssemblers()
                 recipe_name = recipe_name.."-mining-drone-mk1"
                 entity.set_recipe(recipe_name)
             end
-            ]]
         end
         
     end
