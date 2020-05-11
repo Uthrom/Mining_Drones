@@ -5,7 +5,7 @@ local function MigrateAssemblers()
         for _, entity in ipairs(surface.find_entities_filtered{type="assembling-machine"}) do
             recipe = entity.get_recipe()
             if recipe ~= nil then
-                log("Assembler: "..entity.name.." Recipe: "..recipe.name)
+                -- log("Assembler: "..entity.name.." Recipe: "..recipe.name)
                 if recipe.name == "mining-drone" then
                     entity.set_recipe("mining-drone-mk1")
                 end
