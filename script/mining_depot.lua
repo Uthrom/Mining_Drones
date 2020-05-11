@@ -21,7 +21,8 @@ local script_data =
   migrate_recent = true,
   migrate_drones = true,
   migrate_output_amount = true,
-  migrate_desync_maybe = true
+  migrate_desync_maybe = true,
+  migrate_from_klonan = false
 }
 
 
@@ -1040,6 +1041,27 @@ lib.on_load = function()
 end
 
 lib.on_configuration_changed = function()
+
+  local script_depots = #script_data.depots
+  local world_depots = 0
+  for _, surface in pairs(game.surfaces) do
+    for _, entity in ipairs(surface.find_entities_filtered{name=names.mining_depot}) do
+      world_depots = world_depots + 1
+    end
+  end
+  
+  if not script_data.migrate_from_klonan or (script_depots ~= world_depots) then
+    log("Script depots: "..script_depots.." World depots: "..world_depots)
+    script_data.migrate_from_klonan = true
+    for _, surface in pairs(game.surfaces) do
+      for _, entity in ipairs(surface.find_entities_filtered{name=names.mining_depot}) do
+        mining_depot.new(entity)
+      end
+    end
+    clear_global_taken()
+    rescan_all_depots()
+  end
+
 
   if not script_data.migrate_corpse then
     script_data.migrate_corpse = true
