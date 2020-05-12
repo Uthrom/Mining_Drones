@@ -62,6 +62,12 @@ lib.on_init = function()
   global.mining_technologies = global.mining_technologies or script_data
 end
 
+lib.on_configuration_changed = function()
+  for k, force in pairs(game.forces) do 
+    force.reset_technology_effects()
+  end
+end
+
 lib.events =
 {
   [defines.events.on_research_finished] = on_research_finished
