@@ -22,7 +22,6 @@ local technology_effects =
   end,
 }
 
-
 local on_research_finished = function(event)
   local technology = event.research
   local name = technology.name
@@ -62,15 +61,27 @@ lib.on_init = function()
   global.mining_technologies = global.mining_technologies or script_data
 end
 
-lib.on_configuration_changed = function()
-  for k, force in pairs(game.forces) do 
-    force.reset_technology_effects()
-  end
-end
-
 lib.events =
 {
   [defines.events.on_research_finished] = on_research_finished
 }
+
+lib.on_configuration_changed = function()
+  log("mining_technologies: Resetting bonuses")
+  for k, force in pairs(game.forces) do 
+    for _, technology in pairs(force.technologies) do
+      local name = technology.name
+      for effect_name, effect in pairs (technology_effects) do
+        if name:find(effect_name, 0, true) then
+          log("Updated "..name)
+          effect(technology)
+          break
+        end
+      end
+    end
+
+    force.reset_technology_effects()
+  end
+end
 
 return lib
