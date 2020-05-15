@@ -20,7 +20,7 @@ data:extend({
     name = "mining_drone_chance_to_drop_armor_on_death",
     order = "ad",
     setting_type = "startup",
-    localized_name = "Chance to drop armor on death",
+    localised_name = "Chance to drop armor on death",
     default_value = 100,
     minimum_value = 0,
     maximum_value = 100
