@@ -1041,7 +1041,6 @@ lib.on_load = function()
 end
 
 lib.on_configuration_changed = function()
-
   local script_depots = #script_data.depots
   local world_depots = 0
   for _, surface in pairs(game.surfaces) do
