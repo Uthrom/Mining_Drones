@@ -860,6 +860,7 @@ local on_tick = function(event)
     for unit_number, depot in pairs (bucket) do
       if not (depot.entity.valid) then
         depot:handle_depot_deletion(unit_number)
+        bucket[unit_number] = nil
       else
         depot:update()
       end
@@ -1098,6 +1099,7 @@ lib.on_configuration_changed = function()
         depot:check_for_rescan()
       else
         depot:handle_depot_deletion(unit_number)
+        bucket[unit_number] = nil
       end
     end
   end
