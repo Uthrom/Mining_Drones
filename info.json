@@ -1,13 +1,13 @@
 {
   "name": "Upgradable_Mining_Drones",
-  "version": "0.18.6",
+  "version": "0.18.5",
   "title": "Upgradable Mining Drones",
   "author": "Klonan, modded by Uthrom",
   "contact": "Uthrom",
   "homepage": "https://mods.factorio.com/mod/Upgradable_Mining_Drones",
   "description": "Replaces Klonan's mining drones with health/shield-upgradable mining drones.",
   "dependencies": [
-    "base >= 0.18.27", 
+    "base >= 0.18.0", 
     "!Mining_Drones"
   ],
   "factorio_version": "0.18"

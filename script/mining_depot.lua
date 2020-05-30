@@ -430,9 +430,7 @@ function mining_depot:has_enough_fluid()
 end
 
 function mining_depot:get_input_fluidbox()
-  local fluidbox = self.entity.fluidbox
-  if #fluidbox == 0 then return end
-  return fluidbox[1]
+  return self.entity.fluidbox[1]
 end
 
 function mining_depot:get_drone_item_count()
@@ -861,7 +859,6 @@ local on_tick = function(event)
   if bucket then
     for unit_number, depot in pairs (bucket) do
       if not (depot.entity.valid) then
-        depot:handle_depot_deletion(unit_number)
         bucket[unit_number] = nil
       else
         depot:update()
@@ -1097,12 +1094,7 @@ lib.on_configuration_changed = function()
   for k, bucket in pairs (script_data.depots) do
     --Idk, things can happen, let the depots rescan if they want.
     for unit_number, depot in pairs (bucket) do
-      if depot.entity.valid then
-        depot:check_for_rescan()
-      else
-        depot:handle_depot_deletion(unit_number)
-        bucket[unit_number] = nil
-      end
+      depot:check_for_rescan()
     end
   end
 
