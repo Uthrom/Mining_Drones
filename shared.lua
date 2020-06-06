@@ -8,7 +8,11 @@ data.drone_metadata = {
         health = 100,
         attack_range = 0.5,
         resistance = {
-            nil
+            {
+                type = "acid",
+                decrease = 0,
+                percent = (settings.startup.mining_drones_immune_to_acid.value and 100 or 0)
+            }
         },
         ingredients = {
             {"iron-plate", 10},
@@ -41,7 +45,7 @@ data.drone_metadata = {
             {
                 type = "acid",
                 decrease = 0,
-                percent = 20
+                percent = (settings.startup.mining_drones_immune_to_acid.value and 100 or 20)
             },
             {
                 type = "explosion",
@@ -101,7 +105,7 @@ data.drone_metadata = {
             {
                 type = "acid",
                 decrease = 0,
-                percent = 40
+                percent = (settings.startup.mining_drones_immune_to_acid.value and 100 or 40)
             },
             {
                 type = "fire",

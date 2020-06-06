@@ -14,14 +14,14 @@ data:extend({
     setting_type = "startup",
     localised_name = "Mute drone sounds",
     default_value = false
-[[-]  },{
-    type = "bool-setting",
-    name = "mining_drones_immune_to_acid",
-    order = "ad",
-    setting_type = "startup",
-    localised_name = "Mining drones are immune to acid",
-    default_value = false
-    ]]
+  },
+  {
+     type = "bool-setting",
+     name = "mining_drones_immune_to_acid",
+     order = "ad",
+     setting_type = "startup",
+     localised_name = "Mining drones are immune to acid",
+     default_value = false
   },
   {
     type = "int-setting",
@@ -32,5 +32,5 @@ data:extend({
     default_value = 100,
     minimum_value = 0,
     maximum_value = 100
-  },
+  }
 })

@@ -161,6 +161,10 @@ local make_drone = function(name, tint, item, health, resistance, attack_range)
       variations = sound
     } or nil
   }
+
+  log(bot.name)
+  log(serpent.block(bot.resistances))
+
 --error(serpent.block(base.animations[1].running))
 
   local corpse = util.copy(data.raw["character-corpse"]["character-corpse"])
