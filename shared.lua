@@ -23,12 +23,12 @@ data.drone_metadata = {
             nil
         },
         ore_icon_layers = {
-            {
-                icon = "__base__/graphics/icons/character.png",
-                icon_size = 64,
-                shift={8,0},
-                scale=0.50
-            }
+--             {
+--                 icon = icon = "__base__/graphics/icons/character.png",
+--                 icon_size = 64,
+--                 shift={8,0},
+--                 scale=0.50
+--             }
         }
     },
 
